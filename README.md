@@ -82,9 +82,13 @@ graph TD
     end
 ```
 
-For comprehensive technical design documents, data schemas, and ADRs:
+For comprehensive technical design documents, data schemas, developer guides, and ADRs:
 - 📑 [System Architecture Details](docs/architecture.md)
 - 🔌 [REST API Specification](docs/api.md)
+- 🛠️ [Setup & Installation Guide](docs/setup.md)
+- 📖 [User & Workflow Guide](docs/usage.md)
+- 💻 [Developer & Codebase Guide](docs/development.md)
+- 🛡️ [Security Architecture](docs/security.md)
 - 💡 [Architecture Decision Records (ADRs)](docs/decisions.md)
 - 📜 [Academic Specification Archive](docs/coursework-spec.md)
 
