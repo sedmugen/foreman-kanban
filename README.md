@@ -12,12 +12,22 @@
 
 ## Visual Demo & System Workflows
 
-> **Visuals before source code:** Recruiter glance summary under 30 seconds.
+> **Visuals before source code:** A recruiter can understand the application in under 30 seconds.
 
-![System Architecture](assets/images/architecture-diagram.svg)
+### 1. Manager Dashboard & Inspection Queue (PR Inbox)
+![Manager Dashboard & Inspection Queue](assets/images/manager-dashboard.svg)
 
-### Task State Machine & Inspection Workflow
-![State Machine Workflow](assets/images/workflow-diagram.svg)
+### 2. Employee Dashboard & Work Orders
+![Employee Dashboard & Work Orders](assets/images/employee-dashboard.svg)
+
+### 3. Industrial Authentication & Role Selection
+![Industrial Authentication Screen](assets/images/auth-screen.svg)
+
+### 4. Task State Machine & Inspection Workflow
+![Task State Machine & Inspection Workflow](assets/images/workflow-diagram.svg)
+
+### 5. Multi-Tier Cloud Architecture
+![Multi-Tier System Architecture](assets/images/architecture-diagram.svg)
 
 ---
 
