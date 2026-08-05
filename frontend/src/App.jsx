@@ -49,4 +49,5 @@ export default function App() {
       </ToastProvider>
     </AuthProvider>
   );
-}// This should fail
+}
+
