@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import RejectPanel from './RejectPanel';
 
 function ComplexityDots({ level }) {
   return (
@@ -17,14 +18,6 @@ function ComplexityDots({ level }) {
 
 export default function InspectionQueue({ tasks, onConfirm, onReject }) {
   const [openRejectId, setOpenRejectId] = useState(null);
-  const [rejectReason, setRejectReason] = useState('');
-
-  function handleReject(taskId) {
-    const feedback = rejectReason.trim() || 'Needs another pass before it can be signed off.';
-    onReject(taskId, feedback);
-    setOpenRejectId(null);
-    setRejectReason('');
-  }
 
   return (
     <div className="queue-section">
@@ -62,30 +55,14 @@ export default function InspectionQueue({ tasks, onConfirm, onReject }) {
                 </button>
               </div>
               {openRejectId === task.id && (
-                <div className="reject-panel">
-                  <textarea
-                    placeholder="What needs to be fixed before this can be signed off?"
-                    value={rejectReason}
-                    onChange={(e) => setRejectReason(e.target.value)}
-                  />
-                  <div className="reject-actions">
-                    <button
-                      className="btn btn-sm btn-stamp-reject"
-                      onClick={() => handleReject(task.id)}
-                    >
-                      Confirm rejection
-                    </button>
-                    <button
-                      className="btn btn-sm btn-ghost"
-                      onClick={() => {
-                        setOpenRejectId(null);
-                        setRejectReason('');
-                      }}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
+                <RejectPanel
+                  taskId={task.id}
+                  onReject={(taskId, feedback) => {
+                    onReject(taskId, feedback);
+                    setOpenRejectId(null);
+                  }}
+                  onCancel={() => setOpenRejectId(null)}
+                />
               )}
             </div>
           ))
