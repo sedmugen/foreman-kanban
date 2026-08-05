@@ -56,6 +56,15 @@ def task_doc_to_response(doc: dict, users_cache: dict = None) -> TaskResponse:
     )
 
 
+async def resolve_task_response(db, doc: dict) -> TaskResponse:
+    """Helper to convert task doc to response with resolved assignee name."""
+    assigned_user = await db.users.find_one({"firebase_uid": doc.get("assigned_to")})
+    name = assigned_user.get("name") if assigned_user else None
+    cache = {doc.get("assigned_to"): name} if name else None
+    return task_doc_to_response(doc, cache)
+
+
+
 # ─── LIST TASKS ──────────────────────────────────────────────
 
 @router.get("/tasks", response_model=list[TaskResponse])
@@ -178,7 +187,7 @@ async def update_task(
     )
 
     updated = await db.tasks.find_one({"_id": ObjectId(task_id)})
-    return task_doc_to_response(updated)
+    return await resolve_task_response(db, updated)
 
 
 # ─── DELETE TASK (Manager only) ──────────────────────────────
@@ -250,7 +259,7 @@ async def submit_for_review(
     )
 
     updated = await db.tasks.find_one({"_id": ObjectId(task_id)})
-    return task_doc_to_response(updated)
+    return await resolve_task_response(db, updated)
 
 
 # ─── START TASK (Employee only) ──────────────────────────────
@@ -294,7 +303,7 @@ async def start_task(
     )
 
     updated = await db.tasks.find_one({"_id": ObjectId(task_id)})
-    return task_doc_to_response(updated)
+    return await resolve_task_response(db, updated)
 
 
 # ─── REVIEW TASK (Manager only) ─────────────────────────────
@@ -374,4 +383,4 @@ async def review_task(
         )
 
     updated = await db.tasks.find_one({"_id": ObjectId(task_id)})
-    return task_doc_to_response(updated)
+    return await resolve_task_response(db, updated)
